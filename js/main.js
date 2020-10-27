@@ -18,6 +18,42 @@ function addVideoGame() {
         displayGame(game);
     }
     function displayGame(myGame) {
+        var displayDiv = getById("display");
+        var gameHeading = document.createElement("h2");
+        gameHeading.innerText = myGame.title;
+        var gameInfo = document.createElement("p");
+        var notDigitalDisplay = "";
+        if (myGame.isDigitalOnly) {
+            notDigitalDisplay = "not";
+        }
+        gameInfo.innerText = $;
+        {
+            myGame.title;
+        }
+        has;
+        a;
+        rating;
+        of;
+        $;
+        {
+            myGame.rating;
+        }
+        It;
+        cost;
+        $;
+        {
+            myGame.price;
+        }
+        It;
+        is;
+        $;
+        {
+            notDigitalDisplay;
+        }
+        digital;
+        only;
+        displayDiv.appendChild(gameHeading);
+        displayDiv.appendChild(gameInfo);
     }
     function getById(id) {
         return document.getElementById(id);
