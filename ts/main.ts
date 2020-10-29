@@ -38,9 +38,9 @@ function displayGame(myGame:VideoGame):void{
         }
        
 
-        gameInfo.innerText = ${myGame.title} has a rating of $
-        {myGame.rating}. It cost ${myGame.price}. It is $
-        {notDigitalDisplay} digital only ;
+       // gameInfo.innerText = ${myGame.title} has a rating of $
+       // {myGame.rating}. It cost ${myGame.price}. It is $
+        //{notDigitalDisplay} digital only ;
 
         // Add <h2> in the div 
         displayDiv.appendChild(gameHeading);
@@ -59,7 +59,7 @@ function displayGame(myGame:VideoGame):void{
  */
    function getVideoGame():VideoGame{
     let game = new VideoGame();
-    
+    // Populate with data from the form
     let titleInput = 
      <HTMLInputElement>getById("title");
     game.title = titleInput.value;
@@ -78,6 +78,8 @@ function displayGame(myGame:VideoGame):void{
             }
             else{
                 game.isDigitalOnly = false;
+                
+                return game;
             }
     // TODO: Populate with data from the form
     // TODO: return game
