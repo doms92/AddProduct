@@ -16,12 +16,20 @@ window.onload = function(){
     <HTMLElement>document.querySelector("input[type=button]")
     addBtn.onclick = addVideoGame;
 }
+/**
+ * Clears all errors in the validation summary
+ */
+function clearALLErrors(){
+    let errSummary = getInputById("validation-summary");
+    errSummary.innerText = "";
+}
 
 function addVideoGame(){
-    alert("test");
-
+    console.log("Add video game was called");
+    clearALLErrors();
     if(isAllDataValid()){
-    let game = getVideoGame();
+        
+    let game:VideoGame = getVideoGame();
     displayGame(game);
     }
 function displayGame(myGame:VideoGame):void{
@@ -32,15 +40,17 @@ function displayGame(myGame:VideoGame):void{
         gameHeading.innerText = myGame.title;
 //
         let gameInfo = document.createElement("p");
-        let notDigitalDisplay = "";
+        let gameMediumDisplay = "";
         if(myGame.isDigitalOnly){
-            notDigitalDisplay = "not";
-        }
-       
+            gameMediumDisplay = "This is a digital only game";
 
-       // gameInfo.innerText = ${myGame.title} has a rating of $
-       // {myGame.rating}. It cost ${myGame.price}. It is $
-        //{notDigitalDisplay} digital only ;
+        }
+       else{
+           gameMediumDisplay = "You can come buy a Physical copy"
+       }
+
+        gameInfo.innerText = `${myGame.title} has a rating of ${myGame.rating} 
+         It cost ${myGame.price}. ${gameMediumDisplay}`;
 
         // Add <h2> in the div 
         displayDiv.appendChild(gameHeading);
@@ -82,12 +92,39 @@ function displayGame(myGame:VideoGame):void{
                 return game;
             }
     // TODO: Populate with data from the form
-    // TODO: return game
+    
 }
 
 }
-// ADD VALIDATION CODE*********
+function getInputById(id:string):HTMLInputElement{
+    return <HTMLInputElement>document.getElementById(id)
+
+    
+}
+
 function isAllDataValid(){
-    return true;
+    let isValid = true;
 
+    let title = getInputById("title").value;
+    if(title == ""){
+       isValid = false;
+        let errSummary = getInputById("validation-summary");
+        let errItem = document.createElement("li");
+        errItem.innerText = "Title is required!";
+
+            errSummary.appendChild(errItem);
+    }
+     let price = getInputById("price").value;
+     let priceValue = parseFloat(price);
+     if(price == "" || priceValue == NaN){
+        isValid = false;
+
+        let errSummary = getInputById("validation-summary");
+        let errItem = document.createElement("li");
+        errItem.innerText = "Price is required and must be a number";
+
+        errSummary.appendChild(errItem);
+     }   
+    
+    return isValid;
 }
