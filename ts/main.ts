@@ -13,7 +13,7 @@ myGame.isDigitalOnly = true;
 
 window.onload = function(){
     let addBtn = 
-    <HTMLElement>document.querySelector("input[type=button]")
+    <HTMLElement>document.querySelector("input[type=button]");
     addBtn.onclick = addVideoGame;
 }
 /**
@@ -33,12 +33,14 @@ function addVideoGame(){
     displayGame(game);
     }
 function displayGame(myGame:VideoGame):void{
+
         let displayDiv = getById("display");
 
         // Create <h2> with game title
         let gameHeading = document.createElement("h2");
         gameHeading.innerText = myGame.title;
-//
+
+        //
         let gameInfo = document.createElement("p");
         let gameMediumDisplay = "";
         if(myGame.isDigitalOnly){
@@ -63,34 +65,33 @@ function displayGame(myGame:VideoGame):void{
         return document.getElementById(id);
     }
 
-/**
- * Gets all game data from the form 
- * and returns it in a VideoGame object
- */
-   function getVideoGame():VideoGame{
-    let game = new VideoGame();
-    // Populate with data from the form
-    let titleInput = 
-     <HTMLInputElement>getById("title");
-    game.title = titleInput.value;
-     
-    let priceInput =
-        <HTMLInputElement>document.getElementById("price");
-        game.price = parseFloat(priceInput.value);
-
-        let ratingInput = <HTMLSelectElement>getById("rating");
-        game.rating = ratingInput.value
-
-        let DigitalOnly = <HTMLInputElement>getById("online");
-        game.isDigitalOnly = DigitalOnly.checked
-            if(DigitalOnly.checked){
+    function getVideoGame():VideoGame{
+        let game = new VideoGame();
+        // Populate with data from the form
+        let titleInput = 
+         <HTMLInputElement>getById("title");
+        game.title = titleInput.value;
+         
+        let priceInput =
+            <HTMLInputElement>getById("price");
+            game.price = parseFloat(priceInput.value);
+    
+            let ratingInput = <HTMLSelectElement>getById("rating");
+            game.rating = ratingInput.value
+    
+            let DigitalOnly = <HTMLInputElement>getById("online");
+            game.isDigitalOnly = DigitalOnly.checked
+   
+       /*     if(DigitalOnly.checked){
                 game.isDigitalOnly = true;
             }
             else{
                 game.isDigitalOnly = false;
                 
-                return game;
-            }
+                
+            }*/
+
+            return game;
     // TODO: Populate with data from the form
     
 }
@@ -108,23 +109,26 @@ function isAllDataValid(){
     let title = getInputById("title").value;
     if(title == ""){
        isValid = false;
-        let errSummary = getInputById("validation-summary");
-        let errItem = document.createElement("li");
-        errItem.innerText = "Title is required!";
+       addErrorMessage("Title is required");
 
-            errSummary.appendChild(errItem);
+            
     }
      let price = getInputById("price").value;
      let priceValue = parseFloat(price);
      if(price == "" || priceValue == NaN){
         isValid = false;
 
-        let errSummary = getInputById("validation-summary");
-        let errItem = document.createElement("li");
-        errItem.innerText = "Price is required and must be a number";
-
-        errSummary.appendChild(errItem);
+        addErrorMessage("Price is required and must be a number");
      }   
+
+     let rating = getbyId("rating").value
     
     return isValid;
+}
+
+function addErrorMessage(errMsg:string) {
+    let errSummary = getInputById("validation-summary");
+    let errItem = document.createElement("li");
+    errItem.innerText = errMsg;
+    return { errSummary, errItem };
 }

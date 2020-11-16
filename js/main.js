@@ -68,19 +68,20 @@ function isAllDataValid() {
     var title = getInputById("title").value;
     if (title == "") {
         isValid = false;
-        var errSummary = getInputById("validation-summary");
-        var errItem = document.createElement("li");
-        errItem.innerText = "Title is required!";
-        errSummary.appendChild(errItem);
+        addErrorMessage("Title is required");
     }
     var price = getInputById("price").value;
     var priceValue = parseFloat(price);
     if (price == "" || priceValue == NaN) {
         isValid = false;
-        var errSummary = getInputById("validation-summary");
-        var errItem = document.createElement("li");
-        errItem.innerText = "Price is required and must be a number";
-        errSummary.appendChild(errItem);
+        addErrorMessage("Price is required and must be a number");
     }
+    var rating = getbyID("rating").value;
     return isValid;
+}
+function addErrorMessage(errMsg) {
+    var errSummary = getInputById("validation-summary");
+    var errItem = document.createElement("li");
+    errItem.innerText = errMsg;
+    return { errSummary: errSummary, errItem: errItem };
 }
