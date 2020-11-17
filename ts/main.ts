@@ -32,6 +32,7 @@ function addVideoGame(){
     let game:VideoGame = getVideoGame();
     displayGame(game);
     }
+}
 function displayGame(myGame:VideoGame):void{
 
         let displayDiv = getById("display");
@@ -96,7 +97,7 @@ function displayGame(myGame:VideoGame):void{
     
 }
 
-}
+
 function getInputById(id:string):HTMLInputElement{
     return <HTMLInputElement>document.getElementById(id)
 
@@ -121,7 +122,7 @@ function isAllDataValid(){
         addErrorMessage("Price is required and must be a number");
      }   
 
-     let rating = getbyId("rating").value
+     let rating = getInputById("rating").value;
     
     return isValid;
 }
